@@ -1,20 +1,27 @@
-const admin = require("firebase-admin");
-const fs = require("fs");
+import fs from "fs";
+import { initializeApp, cert } from "firebase-admin/app";
+import { getFirestore } from "firebase-admin/firestore";
 
-// Ініціалізація Firebase
-const serviceAccount = require("./serviceAccountKey.json");
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
+const serviceAccount = JSON.parse(
+  fs.readFileSync("serviceAccountKey.json", "utf8")
+);
+
+initializeApp({
+  credential: cert(serviceAccount),
 });
-const db = admin.firestore();
+
+const db = getFirestore();
 
 // Завантаження звітності
-const data = JSON.parse(fs.readFileSync("./MID_12_2024.json"));
 
-async function uploadReports() {
+async function uploadReports(fileJSON) {
   const BATCH_SIZE = 500;
   let batch = db.batch();
   let counter = 0;
+
+  const json = fs.readFileSync(fileJSON, "utf8");
+
+  const data = JSON.parse(json);
 
   for (const item of data) {
     const { TIN, Y, M, ...reportData } = item;
@@ -61,4 +68,4 @@ function checkArr() {
   }
 }
 // checkArr();
-uploadReports().catch(console.error);
+uploadReports("NEW_MID_06_2025.json").catch(console.error);
