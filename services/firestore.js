@@ -21,7 +21,7 @@ const serviceAccount = {
 };
 
 initializeApp({
-  credential: cert(serviceAccount);
+  credential: cert(serviceAccount)
 })
 
 const db = getFirestore();
