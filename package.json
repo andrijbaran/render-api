@@ -4,7 +4,9 @@
   "type": "module",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "server": "node server.js"
   },
   "dependencies": {
     "@fastify/cors": "^11.1.0",
