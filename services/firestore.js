@@ -24,6 +24,7 @@ initializeApp({
   credential: cert(serviceAccount)
 })
 
+
 const db = getFirestore();
 
 export const getReport = async (period, company) => {
