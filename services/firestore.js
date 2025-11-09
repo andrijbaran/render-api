@@ -3,9 +3,9 @@ import { getFirestore } from 'firebase-admin/firestore'
 import fs from 'fs';
 import { fileURLToPath } from 'url';
 
-const serviceAccount = JSON.parse(fs.readFileSync(new URL('./serviceAccountKey.json', import.meta.url)));
+// const serviceAccount = JSON.parse(fs.readFileSync(new URL('./serviceAccountKey.json', import.meta.url)));
 
-// const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT)
+const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT)
 
 
 initializeApp({
